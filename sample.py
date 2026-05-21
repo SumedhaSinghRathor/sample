@@ -40,30 +40,17 @@ def find_duplicate_users(users):
 # O(n³) expensive aggregation
 # -----------------------------
 def expensive_country_stats(users):
-    result = {}
-
-    countries = []
-
+    country_data = {}
     for user in users:
-        if user["country"] not in countries:
-            countries.append(user["country"])
-
-    for country in countries:
-        total_age = 0
-        count = 0
-
-        for user in users:
-            if user["country"] == country:
-
-                # unnecessary nested traversal
-                for another_user in users:
-                    if another_user["id"] == user["id"]:
-                        total_age += another_user["age"]
-                        count += 1
-
-        result[country] = total_age / count if count else 0
-
-    return result
+        country = user["country"]
+        if country not in country_data:
+            country_data[country] = {"total_age": 0, "count": 0}
+        country_data[country]["total_age"] += user["age"]
+        country_data[country]["count"] += 1
+    return {
+        c: d["total_age"] / d["count"] if d["count"] else 0
+        for c, d in country_data.items()
+    }
 
 
 # -----------------------------
