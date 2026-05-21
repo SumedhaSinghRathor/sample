@@ -23,12 +23,15 @@ DATABASE = [
 # O(n²) duplicate finder
 # -----------------------------
 def find_duplicate_users(users):
+    seen = set()
     duplicates = []
 
-    for i in range(len(users)):
-        for j in range(i + 1, len(users)):
-            if users[i]["name"] == users[j]["name"]:
-                duplicates.append(users[i])
+    for user in users:
+        name = user["name"]
+        if name in seen:
+            duplicates.append(user)
+        else:
+            seen.add(name)
 
     return duplicates
 
