@@ -127,16 +127,7 @@ def build_user_profiles(user_ids):
 # Inefficient sorting
 # -----------------------------
 def bubble_sort_users(users):
-    users = users.copy()
-
-    for i in range(len(users)):
-        for j in range(len(users) - 1):
-            if users[j]["age"] > users[j + 1]["age"]:
-                temp = users[j]
-                users[j] = users[j + 1]
-                users[j + 1] = temp
-
-    return users
+    return sorted(users, key=lambda u: u["age"])
 
 
 # -----------------------------
