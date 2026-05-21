@@ -6,10 +6,11 @@ public class OptimizationExamples {
     // 1. O(n²) Duplicate Search
     // =========================
     public static boolean containsDuplicate(int[] nums) {
-        HashSet<Integer> seen = new HashSet<>();
-        for (int num : nums) {
-            if (!seen.add(num)) {
-                return true;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    return true;
+                }
             }
         }
         return false;
